@@ -95,6 +95,44 @@ Notebook Analysis
       ![Alt text](/misc/rock.png?raw=true "Title")
      
    2. ```process_image()``` analysis & worldmap creating
+   
+      Read in csv file as a dataframe
+      ```
+      import pandas as pd
+      
+      df = pd.read_csv('../test_dataset/robot_log.csv', delimiter=';', decimal='.')
+      ```
+      
+      Create list of image pathnames
+      ```
+      csv_img_list = df["Path"].tolist()
+      ```
+      
+      Read in ground truth map and create a 3-channel image with it
+      ```
+      ground_truth = mpimg.imread('../calibration_images/map_bw.png')
+      ground_truth_3d = np.dstack((ground_truth*0, ground_truth*255, ground_truth*0)).astype(np.float)
+      ```
+      Creating a class to be the data container that read in saved data from csv file and populate this object.
+      Worldmap is instantiated as 200 x 200 grids corresponding to a 200m x 200m space (same size as the ground truth
+      map: 200 x 200 pixels) 
+      ```
+      class Databucket():
+         def __init__(self):
+            self.images = csv_img_list  
+            self.xpos = df["X_Position"].values
+            self.ypos = df["Y_Position"].values
+            self.yaw = df["Yaw"].values
+            self.count = 0 # This will be a running index
+            self.worldmap = np.zeros((200, 200, 3)).astype(np.float)
+            self.ground_truth = ground_truth_3d
+        
+      ```
+      Instantiate a Databucket()
+      ```
+      data = Databucket()
+      ```
+
 
 Autonomous Navigation and Mapping 
 
