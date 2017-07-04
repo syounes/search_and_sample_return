@@ -229,60 +229,60 @@ Autonomous Navigation and Mapping
 
    1. ```perception_step()``` and ```decision_step()``` explanation and why these functions were modified as they were.
    
-   In the ```perception_step()```, we apply the same ```process_image()``` functions in succession and update the 
-   Rover state accordingly where the camera images is coming to us in Rover.img
+      In the ```perception_step()```, we apply the same ```process_image()``` functions in succession and update the 
+      Rover state accordingly where the camera images is coming to us in Rover.img
    
-   The world_size is initialized from the Rover.worldmap
-   ```
-   world_size  = Rover.worldmap.shape[0]
-   ```
+      The world_size is initialized from the Rover.worldmap
+      ```
+      world_size  = Rover.worldmap.shape[0]
+      ```
    
-   Update the Rover worldmap(to be displayed on right side of screen)
-   ```
-   Rover.worldmap[y_world, x_world, 2] += 10
-   Rover.worldmap[obs_y_world, obs_x_world, 0] += 1
-   ```
+      Update the Rover worldmap(to be displayed on right side of screen)
+      ```
+      Rover.worldmap[y_world, x_world, 2] += 10
+      Rover.worldmap[obs_y_world, obs_x_world, 0] += 1
+      ```
    
-   Convert rover-centric pixel positions to polar coordinates
-   ```
-   dist, angles = to_polar_coords(xpix, ypix)
-   ```
+      Convert rover-centric pixel positions to polar coordinates
+      ```
+      dist, angles = to_polar_coords(xpix, ypix)
+      ```
    
-   Update the Rover.nav_angles
-   ```
-   Rover.nav_angles = angles
-   ```
+      Update the Rover.nav_angles
+      ```
+      Rover.nav_angles = angles
+      ```
    
-   See if we can find some rocks
-   ```
-   rock_map = find_rocks(warped, levels=(110,110,50))
-   if rock_map.any():
-       rock_x, rock_y = rover_coords(rock_map)
+      See if we can find some rocks
+      ```
+      rock_map = find_rocks(warped, levels=(110,110,50))
+      if rock_map.any():
+          rock_x, rock_y = rover_coords(rock_map)
     
-       rock_x_world, rock_y_world = pix_to_world(rock_x, rock_y, Rover.pos[0], Rover.pos[1],
-                                                   Rover.yaw, world_size, scale)
+          rock_x_world, rock_y_world = pix_to_world(rock_x, rock_y, Rover.pos[0], Rover.pos[1],
+                                                      Rover.yaw, world_size, scale)
                             
-       rock_dist, rock_ang = to_polar_coords(rock_x, rock_y)
-       rock_idx = np.argmin(rock_dist)
-       rock_xcen = rock_x_world(rock_idx)
-       rock_ycen = rock_y_world(rock_idx)
+          rock_dist, rock_ang = to_polar_coords(rock_x, rock_y)
+          rock_idx = np.argmin(rock_dist)
+          rock_xcen = rock_x_world(rock_idx)
+          rock_ycen = rock_y_world(rock_idx)
     
-       Rover.worldmap[rock_ycen, rock_xcen, 1] = 255
-       Rover.vision_image[:, :, 1] = rock_map * 255
-   else:
-       Rover.vision_image[:, :, 1] = 0
-   ```
+          Rover.worldmap[rock_ycen, rock_xcen, 1] = 255
+          Rover.vision_image[:, :, 1] = rock_map * 255
+      else:
+          Rover.vision_image[:, :, 1] = 0
+      ```
    
-   Finally ```return Rover```
+      Finally ```return Rover```
    
-   Regarding the ```decision_step()```, having the Rover.nav_angles not None then we can go through the decision tree
-   for determining throttle, brake and steer commands based on the output of the perception_step() function  
+      Regarding the ```decision_step()```, having the Rover.nav_angles not None then we can go through the decision tree
+      for determining throttle, brake and steer commands based on the output of the perception_step() function  
    
-   If in a state where want to pickup a rock send pickup command
-   ```
-   if Rover.near_sample and Rover.vel == 0 and not Rover.picking_up:
-        Rover.send_pickup = True
-   ```
+      If in a state where want to pickup a rock send pickup command
+      ```
+      if Rover.near_sample and Rover.vel == 0 and not Rover.picking_up:
+           Rover.send_pickup = True
+      ```
    
    2. Autonomousmode navigation results explanation and how we might improve them.
       
