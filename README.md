@@ -8,8 +8,9 @@ First I downloaded the simulator and recorded some data then I got throught the 
 Notebook Analysis
 
    1. Obstacle and rock sample identification.
-      In the perspetive transform image we mapped the navigable terrain, the obstacles that appear in dark and we identified the field of vew of camera by creating a mask
+      In the perspetive transform image we mapped the navigable terrain, the obstacles that appear in dark and we identified    the field of vew of camera by creating a mask
       
+      Perspective Transform
       ```
       # Define calibration box in source (actual) and destination (desired) coordinates
       # These source and destination points are defined to warp the image
@@ -44,7 +45,8 @@ Notebook Analysis
       plt.subplot(121)
       plt.imshow(warped)
       plt.subplot(122)
-      plt.imshow(mask, cmap='gray')```
+      plt.imshow(mask, cmap='gray')
+      ```
      
    2. ```process_image()``` analysis & worldmap creating
 
