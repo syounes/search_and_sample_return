@@ -21,8 +21,11 @@ Notebook Analysis
          mask = cv2.warpPerspective(np.ones_like(img[:,:,0]), M, (img.shape[1], img.shape[0]))
          
          return warped, mask
-         
       ```
+      
+      [//]: # (Image References)
+[image_0]: ./misc/perspective.jpg
+
       Color Thresholding
       
       ```
