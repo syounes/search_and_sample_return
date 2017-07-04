@@ -11,7 +11,7 @@ Notebook Analysis
    
       Perspective Transform
       
-      ![Alt text](/misc/example_grid1.png?raw=true "Title")
+      ![Alt text](/misc/example_grid1.jpg?raw=true "Title")
       
       I've used the example grid image above to choose source points for the
       grid cell in front of the rover (each grid cell is 1 square meter in the sim)
