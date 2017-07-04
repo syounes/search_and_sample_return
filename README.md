@@ -89,10 +89,10 @@ Notebook Analysis
          color_select = np.zeros_like(img[:,:,0])
          color_select[rockpix] = 1
     
-         return color_select
+         return color_select 
       ```
      
-     [Alt text](/misc/perspective.png?raw=true "Title")
+      ![Alt text](/misc/rock.png?raw=true "Title")
      
    2. ```process_image()``` analysis & worldmap creating
 
