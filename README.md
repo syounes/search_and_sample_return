@@ -151,14 +151,14 @@ Notebook Analysis
       obsxpix, obsypix = rover_coords(obs_map)
       ```
       
-      Convert rover-centric pixel values to world coords
+      world_size is instantiated from worldmap
       ```
       world_size  = data.worldmap.shape[0]
       ```
       
       The destination box will be 2*dst_size on each side
       ```
-      scale = 2*dst_size #2*dst_size = 10
+      scale = 2*dst_size # 2*dst_size = 10
       ```
       
       Reading rover position and yaw angle from csv file
