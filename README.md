@@ -90,9 +90,9 @@ Notebook Analysis
          color_select[rockpix] = 1
     
          return color_select
-       ```
+      ```
      
-     ![Alt text](/misc/rock.png?raw=true "Title")
+     [Alt text](/misc/perspective.png?raw=true "Title")
      
    2. ```process_image()``` analysis & worldmap creating
 
