@@ -23,7 +23,7 @@ Notebook Analysis
          return warped, mask
       ```
       
-      ![alt text](http://url/to/img.png)
+      ![Alt text](/misc/threshold.png?raw=true "Title")
 
       Color Thresholding
       
