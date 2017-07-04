@@ -284,14 +284,14 @@ Autonomous Navigation and Mapping
    
    2. Autonomousmode navigation results explanation and how we might improve them.
      
-     After code modification, we can see the rover driving and the worldmap populating the colors while the rover moves 
-     so we can see the vision image showing the navegable terrain and the obstacles and the worldmap getting updates at every
-     frame. 
+      After code modification, we can see the rover driving and the worldmap populating the colors while the rover moves 
+      so we can see the vision image showing the navegable terrain and the obstacles and the worldmap getting updates at every
+      frame. 
      
-     So this basic and simple AI is doing a nice job with a 70% of fidelity but sometimes the rover become confused if 
-     is stucked behind a rock or run in circles so we need to access the manual mode and take over to force the rover 
-     to find a new direction.
+      So this basic and simple AI is doing a nice job with a 70% of fidelity but sometimes the rover become confused if 
+      is stucked behind a rock or run in circles so we need to access the manual mode and take over to force the rover 
+      to find a new direction.
      
-     We can improve the result by managing better the threshold colors to increase the navigation fidelity so we can trace a
-     better path history and prevent the rover from returning to the place so we can scan the hole wolrdmap and 
-     find all the rocks quickly.
+      We can improve the result by managing better the threshold colors to increase the navigation fidelity so we can trace a
+      better path history and prevent the rover from returning to the place so we can scan the hole wolrdmap and 
+      find all the rocks quickly.
