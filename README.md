@@ -44,8 +44,7 @@ Notebook Analysis
       plt.subplot(121)
       plt.imshow(warped)
       plt.subplot(122)
-      plt.imshow(mask, cmap='gray')
-     ```
+      plt.imshow(mask, cmap='gray')```
      
    2. ```process_image()``` analysis & worldmap creating
 
