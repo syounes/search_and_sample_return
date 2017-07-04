@@ -128,10 +128,101 @@ Notebook Analysis
             self.ground_truth = ground_truth_3d
         
       ```
+      
       Instantiate a Databucket()
       ```
       data = Databucket()
       ```
+      
+      Apply perspective transform & mask
+      ```
+      warped, mask = perspect_transform(grid_img, source, destination)
+      ```
+      
+      Apply color threshold to identify navigable terrain/obstacles
+      ```
+      threshed = color_thresh(warped)
+      obs_map = np.absolute(np.float32(threshed) - 1) * mask
+      ```
+      
+      Convert thresholded & obstacles image pixel values to rover-centric coords
+      ```
+      xpix, ypix = rover_coords(threshed)
+      obsxpix, obsypix = rover_coords(obs_map)
+      ```
+      
+      Convert rover-centric pixel values to world coords
+      ```
+      world_size  = data.worldmap.shape[0]
+      ```
+      
+      The destination box will be 2*dst_size on each side
+      ```
+      scale = 2*dst_size #2*dst_size = 10
+      ```
+      
+      Reading rover position and yaw angle from csv file
+      ```
+      xpos = data.xpos[data.count]
+      ypos = data.ypos[data.count]
+      yaw = data.yaw[data.count]
+      ```
+      
+      Convert rover-centric pixel values to world coords
+      ```
+      x_world, y_world = pix_to_world(xpix, ypix, xpos, ypos,
+                                       yaw, world_size, scale)
+      obs_x_world, obs_y_world = pix_to_world(obsxpix, obsypix, xpos, ypos,
+                                       yaw, world_size, scale)
+      ```
+      
+      Update worldmap (to be displayed on right side of screen)
+      ```
+      data.worldmap[y_world, x_world, 2] = 255
+      data.worldmap[obs_y_world, obs_x_world, 0] = 255
+      nav_pix = data.worldmap[:,:,2] > 0
+      data.worldmap[nav_pix, 0] = 0
+      ```
+      
+      See if we can fins some rocks
+      ```
+      rock_map = find_rocks(warped, levels=(110,110,50))
+      if rock_map.any():
+         rock_x, rock_y = rover_coord(rock_map)
+      ```
+      
+      Make a mosaic image
+      
+      Create a blank image
+      ```
+      output_image = np.zeros((img.shape[0] + data.worldmap.shape[0], img.shape[1]*2, 3))
+      ```
+      Put the original image in the upper left hand corner
+      ```
+      output_image[0:img.shape[0], 0:img.shape[1]] = img
+      ```
+      Add the warped image in the upper right hand corner
+      ```
+      output_image[0:img.shape[0], img.shape[1]:] = warped
+      ```
+      Overlay worldmap with ground truth map
+      ```
+      map_add = cv2.addWeighted(data.worldmap, 1, data.ground_truth, 0.5, 0)
+      ```
+      Flip map overlay so y-axis points upward and add to output_image 
+      ```
+      output_image[img.shape[0]:, 0:data.worldmap.shape[1]] = np.flipud(map_add)
+      ```
+      
+      Then putting some text over the image
+      ```
+      cv2.putText(output_image,"Populate this image with your analyses to make a video!", (20, 20), 
+                  cv2.FONT_HERSHEY_COMPLEX, 0.4, (255, 255, 255), 1)
+      if data.count < len(data.images) - 1:
+         data.count += 1 # Keep track of the index in the Databucket()
+      ```
+      
+      Finaly ```return output_image```
 
 
 Autonomous Navigation and Mapping 
