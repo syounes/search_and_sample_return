@@ -11,11 +11,12 @@ Notebook Analysis
    
       Perspective Transform
       
-      In the perspetive transform image we've mapped the navigable terrain, the obstacles that appears in 
-      dark color and we identified the field of vew of camera by creating a mask
+      ![Alt text](/misc/example_grid1.png?raw=true "Title")
+      
+      I've used the example grid image above to choose source points for the
+      grid cell in front of the rover (each grid cell is 1 square meter in the sim)
+     
       ```
-      # I've used the example grid image above to choose source points for the
-      # grid cell in front of the rover (each grid cell is 1 square meter in the sim)
       def perspect_transform(img, src, dst):
            
          M = cv2.getPerspectiveTransform(src, dst)
@@ -38,12 +39,15 @@ Notebook Analysis
                         [image.shape[1]/2 + dst_size, image.shape[0] - 2*dst_size - bottom_offset], 
                         [image.shape[1]/2 - dst_size, image.shape[0] - 2*dst_size - bottom_offset],
                         ])
+                        
       warped, mask = perspect_transform(grid_img, source, destination)
       ```
       
       ![Alt text](/misc/perspective.png?raw=true "Title")
 
       Color Thresholding
+      
+      For obstacles you can just invert your color selection that you used to detect ground pixels, i.e., if you've decided         that everything above the threshold is navigable terrain, then everthing below the threshold must be an obstacle!
       
       ```
       # Identify pixels above the threshold
