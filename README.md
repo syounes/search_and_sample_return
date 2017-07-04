@@ -223,6 +223,8 @@ Notebook Analysis
       ```
       
       Finaly ```return output_image```
+      
+      ![Alt text](/misc/test_mapping.mp4?raw=true "Title")
 
 
 Autonomous Navigation and Mapping 
