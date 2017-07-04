@@ -29,9 +29,11 @@ Notebook Analysis
       These source and destination points are defined to warp the image
       to a grid where each 10x10 pixel square represents 1 square meter
       The destination box will be 2*dst_size on each side
+      
       ```dst_size = 5```
       
       Setting the bottom offset
+      
       ```bottom_offset = 6```
       
       ```
