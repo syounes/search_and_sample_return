@@ -24,9 +24,9 @@ Notebook Analysis
       ```
       
       [//]: # (Image References)
-[image_0]: ./misc/perspective.jpg
-# Search and Sample Return Project
-![alt text][image_0]
+      [image_0]: ./misc/perpctive.png
+      # Search and Sample Return Project
+      [image_0]
 
       Color Thresholding
       
