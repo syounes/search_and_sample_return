@@ -275,5 +275,13 @@ Autonomous Navigation and Mapping
    
    Finally ```return Rover```
    
+   Regarding the ```decision_step()```, having the Rover.nav_angles not None then we can go through the decision tree
+   for determining throttle, brake and steer commands based on the output of the perception_step() function  
+   
+   If in a state where want to pickup a rock send pickup command
+   ```if Rover.near_sample and Rover.vel == 0 and not Rover.picking_up:
+        Rover.send_pickup = True
+   ```
+   
    2. Autonomousmode navigation results explanation and how we might improve them.
 
