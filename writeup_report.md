@@ -285,7 +285,7 @@ Autonomous Navigation and Mapping
    2. Autonomousmode navigation results explanation and how we might improve them.
      
       After code modification, we can see the rover driving and the worldmap populating the colors while the rover moves 
-      so we can see the vision image showing the navegable terrain and the obstacles and the worldmap getting updates at every
+      so we can see the vision image showing the navigable terrain and the obstacles and the worldmap getting updates at every
       frame. 
      
       So this basic and simple AI is doing a nice job with a 70% of fidelity but sometimes the rover become confused if 
