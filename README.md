@@ -22,7 +22,7 @@ Notebook Analysis
          M = cv2.getPerspectiveTransform(src, dst)
          warped = cv2.warpPerspective(img, M, (img.shape[1], img.shape[0]))# keep same size as input image
          mask = cv2.warpPerspective(np.ones_like(img[:,:,0]), M, (img.shape[1], img.shape[0]))
-         
+         # Return the warped image and his mask
          return warped, mask
       ```
       
@@ -51,11 +51,13 @@ Notebook Analysis
 
       Color Thresholding
       
-      For obstacles you can just invert your color selection that you used to detect ground pixels, i.e., if you've decided         that everything above the threshold is navigable terrain, then everthing below the threshold must be an obstacle!
+      For obstacles we can just invert the color selection that we used to detect ground pixels. 
+      Everything above the threshold is navigable terrain, then everthing below the threshold must be an obstacle.
+      For rocks, think about imposing a lower and upper boundary in your color selection to be more specific about 
+      choosing colors.
       
+      Threshold of RGB > 160 does a nice job of identifying ground pixels only
       ```
-      # Identify pixels above the threshold
-      # Threshold of RGB > 160 does a nice job of identifying ground pixels only
       def color_thresh(img, rgb_thresh=(160, 160, 160)):
          # Create an array of zeros same xy size as img, but single channel
          color_select = np.zeros_like(img[:,:,0])
@@ -68,7 +70,10 @@ Notebook Analysis
          # Index the array of zeros with the boolean array and set to 1
          color_select[above_thresh] = 1
          # Return the binary image
-         return color_select      
+         return color_select  
+         
+         threshed = color_thresh(warped)
+         obs_map = np.absolute(np.float32(threshed) - 1) * mask
       ```
       
      
