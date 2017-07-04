@@ -53,8 +53,6 @@ Notebook Analysis
       
       For obstacles we can just invert the color selection that we used to detect ground pixels. 
       Everything above the threshold is navigable terrain, then everthing below the threshold must be an obstacle.
-      For rocks, think about imposing a lower and upper boundary in your color selection to be more specific about 
-      choosing colors.
       
       Threshold of RGB > 160 does a nice job of identifying ground pixels only
       ```
@@ -75,7 +73,26 @@ Notebook Analysis
          threshed = color_thresh(warped)
          obs_map = np.absolute(np.float32(threshed) - 1) * mask
       ```
+      ![Alt text](/misc/threshold.png?raw=true "Title")
       
+      For rocks, we think about imposing a lower and upper boundary in our color selection to be more specific about 
+      choosing colors.
+      
+      RGB of 110,110 and 50 can detect the yellow color of the rocks within the images
+      
+      ```
+      def find_rocks(img, levels=(110,110,50)):
+         rockpix = (img[:,:,0] > levels[0]) \
+                 & (img[:,:,1] > levels[1]) \
+                 & (img[:,:,2] < levels[2])
+            
+         color_select = np.zeros_like(img[:,:,0])
+         color_select[rockpix] = 1
+    
+         return color_select
+       ```
+     
+     ![Alt text](/misc/rock.png?raw=true "Title")
      
    2. ```process_image()``` analysis & worldmap creating
 
