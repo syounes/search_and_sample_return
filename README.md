@@ -23,10 +23,7 @@ Notebook Analysis
          return warped, mask
       ```
       
-      [//]: # (Image References)
-      [image_0]: ./misc/rover_image.jpg
-      # Search and Sample Return Project
-      [image_0]:
+      ![alt text](http://url/to/img.png)
 
       Color Thresholding
       
