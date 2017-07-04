@@ -7,10 +7,11 @@ First I downloaded the simulator and recorded some data then I got throught the 
 
 Notebook Analysis
 
-1. Obstacle and rock sample identification.
+   1. Obstacle and rock sample identification.
    
    
-   
- 2. ```python process_image()``` analysis
+   2. ```process_image()``` analysis & worldmap creating
 
-Autonomous Navigation and Mapping
+Autonomous Navigation and Mapping 
+
+   1. ```perception_step()``` and ```decision_step()```
