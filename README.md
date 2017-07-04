@@ -14,4 +14,7 @@ Notebook Analysis
 
 Autonomous Navigation and Mapping 
 
-   1. ```perception_step()``` and ```decision_step()```
+   1. ```perception_step()``` and ```decision_step()``` explanation and why these functions were modified as they were.
+   
+   2. Autonomousmode navigation results explanation and how we might improve them.
+
