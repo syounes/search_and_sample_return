@@ -3,7 +3,7 @@ Robotics Nanodegree Program Project Submission
 
 I'll go through the basic implementation and the necessary steps for the project submission.
 
-First I downloaded the simulator and recorded some data then I got throught the environment setup with the python starterkit and finally I run the Rover_Project_Test_Notebook.ipynb from the project repository folder under the RoboND environmnet and Jupyter Notebook.
+I got throught the environment setup with the python starterkit and finally I run the Rover_Project_Test_Notebook.ipynb from the project repository folder under the RoboND environmnet and Jupyter Notebook.
 
 Notebook Analysis
 
@@ -14,10 +14,6 @@ Notebook Analysis
       In the perspetive transform image we mapped the navigable terrain, the obstacles that appear in 
       dark and we identified the field of vew of camera by creating a mask
       ```
-      # Define calibration box in source (actual) and destination (desired) coordinates
-      # These source and destination points are defined to warp the image
-      # to a grid where each 10x10 pixel square represents 1 square meter
-      # The destination box will be 2*dst_size on each side
       def perspect_transform(img, src, dst):
            
          M = cv2.getPerspectiveTransform(src, dst)
@@ -26,24 +22,6 @@ Notebook Analysis
          
          return warped, mask
          
-      # Define calibration box in source (actual) and destination (desired) coordinates
-      # These source and destination points are defined to warp the image
-      # to a grid where each 10x10 pixel square represents 1 square meter
-      # The destination box will be 2*dst_size on each side
-         dst_size = 5 
-         
-      # Set a bottom offset to account for the fact that the bottom of the image 
-      # is not the position of the rover but a bit in front of it
-      # this is just a rough guess, feel free to change it!
-      bottom_offset = 6
-      source = np.float32([[14, 140], [301 ,140],[200, 96], [118, 96]])
-      destination = np.float32([[image.shape[1]/2 - dst_size, image.shape[0] - bottom_offset],
-                  [image.shape[1]/2 + dst_size, image.shape[0] - bottom_offset],
-                  [image.shape[1]/2 + dst_size, image.shape[0] - 2*dst_size - bottom_offset], 
-                  [image.shape[1]/2 - dst_size, image.shape[0] - 2*dst_size - bottom_offset],
-                  ])
-                  
-      warped, mask = perspect_transform(grid_img, source, destination)
       ```
       Color Thresholding
       
